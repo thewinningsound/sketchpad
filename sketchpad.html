@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<title>Sketchpad</title>
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<style type="text/css">
+			.grid {
+			display: inline;
+			padding: 5px 15px;
+			}
+
+			.row {
+			display: block;
+			}
+
+			.black {
+				background: #000000;
+			}
+
+		</style>
+	</head>
+	<body>
+		<button type="button" id="button">Clear</button>
+		<button type="button" id="square">Change Size</button>
+		<div id="container">
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		$(document).ready(createGrid(16,16));
+
+		$("#button").on('click', function () {
+			$('.grid').removeClass("black");
+		});
+
+		$('#square').on('click', function() {
+			var num_rows = prompt("Enter number of rows");
+			var num_cols = prompt("Enter number of cols");
+			createGrid(num_rows, num_cols);
+		});
+
+		function createGrid(r,c) {
+			$(".grid").remove();
+			for (var i = 0; i < r; i++) {
+				var row = $('<div class="row grid"></div>');
+				$("#container").append(row);
+				for (var j = 0; j < c-1; j++) {
+					var col = $('<div class="col grid"></div>');
+					$(".row").last().append(col);
+				};
+			};
+
+			$('.grid').on('mouseenter', 'div', function() {
+				$(this).addClass("black");
+			});
+		};
+
+	</script>
+
+
+</html>
